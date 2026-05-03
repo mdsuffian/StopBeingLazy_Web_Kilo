@@ -1,0 +1,11 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "description": "SmartWeb Mode v6.2.0 — Three-layer research-driven enforcement. S2 now has: Layer 1 (official docs baseline), Layer 2 (creative community sources), Layer 3 (deep implications — reference implementations, performance, security, compatibility, deprecation). 36 URL templates. 15-row anti-laziness table.",
+  "version": "6.2.0",
+  "agent": {
+    "smartweb": {
+      "file": ".kilo/agent/smartweb.md",
+      "mode": "primary"
+    }
+  }
+}
