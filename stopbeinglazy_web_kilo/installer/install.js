@@ -68,7 +68,7 @@ const targetFile = path.join(targetDir, 'smartweb.md');
 
 console.log('');
 console.log('\x1b[36m╔══════════════════════════════════════════╗');
-console.log('║  SmartWeb Mode Agent Installer v6.2.0   ║');
+console.log('║  SmartWeb Mode Agent Installer v6.3.0   ║');
 console.log('╚══════════════════════════════════════════╝\x1b[0m');
 console.log('');
 console.log('Source : %s', agentSource);

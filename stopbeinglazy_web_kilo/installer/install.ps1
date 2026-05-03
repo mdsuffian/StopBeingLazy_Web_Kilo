@@ -41,7 +41,7 @@ if ($Project -ne "") {
 
 Write-Host ""
 Write-Host "╔══════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║  SmartWeb Mode Agent Installer v6.2.0   ║" -ForegroundColor Cyan
+Write-Host "║  SmartWeb Mode Agent Installer v6.3.0   ║" -ForegroundColor Cyan
 Write-Host "╚══════════════════════════════════════════╝" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Source : $agentSource"
