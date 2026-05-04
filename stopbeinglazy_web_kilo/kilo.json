@@ -1,7 +1,7 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
-  "description": "SmartWeb Mode v6.3.0 — Four-layer S2 protocol with post-completion iterative improvement search. Layers: official docs, creative community, deep implications, iterative polish (lessons learned, refinements, code review, upgrade readiness). 42 URL templates. 18-row anti-laziness table.",
-  "version": "6.3.0",
+  "description": "SmartWeb Mode v8.0.0 — Structural anti-laziness architecture: S1 GATE (3 objective checks to prevent trivial routing), COMPLETENESS CHECK (post-execution 3-question quality gate), trigger-based webfetch (precision, not ritual), LAZY THOUGHT DETECTOR (7 thoughts with corrections), S2 vague-bullet escalation, S3 evidence requirement, S4 delegation enforcement.",
+  "version": "8.0.0",
   "agent": {
     "smartweb": {
       "file": ".kilo/agent/smartweb.md",

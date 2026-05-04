@@ -1,89 +1,106 @@
-# SmartWeb Mode v6.3.0 — Kilo Code Agent
+# SmartWeb Mode v8.0.0 — Kilo Code Agent
 
-**Four-layer research-driven S2 protocol with post-completion iterative improvement search.**
+**Structural anti-laziness architecture. Mechanical gates beat Smart Mode when the underlying model is dumb or lazy.**
 
-Strategy 2 now executes four distinct research passes — from baseline correctness through to post-completion polish. The final layer searches for refinements after the solution is built: lessons learned, code review patterns, accessibility gaps, and upgrade readiness. SmartWeb doesn't just build solutions — it polishes them.
+Previous versions (v3-v7) focused on INPUT-side forcing: mandatory webfetch before any action. This failed because a lazy model does a half-hearted fetch and still produces lazy output. v8.0.0 inverts the approach: quality gates on the OUTPUT side make thoroughness mechanically inescapable.
 
-## S2: Four-Layer Research Architecture
+## Why v8.0.0 Beats Smart Mode for Lazy Models
+
+| Problem | Smart Mode (code) | SmartWeb v6-v7 | SmartWeb v8.0.0 |
+|---|---|---|---|
+| Lazy model classifies everything as S1 | Trusts model judgment → abused | Irrelevant (webfetch runs regardless) | **S1 GATE: 3 objective checks lock S1 unless truly trivial** |
+| Lazy model writes vague plans | "1. Fix bug" passes S2 | Same problem | **Vague bullets trigger forced S3 escalation** |
+| Lazy model skips edge cases | No enforcement | No enforcement | **COMPLETENESS CHECK: 3 questions after every task** |
+| Lazy model declares "done" prematurely | No gate | No gate | **All 3 checks must pass or task is not done** |
+| Lazy model skips web search for stale knowledge | No enforcement | Wastes tokens on trivial tasks too | **Trigger-based webfetch: required for knowledge gaps, skipped for fundamentals** |
+
+## Architecture
 
 ```
-STEP 0: MANDATORY BASELINE (all strategies)
-    └─ Official docs, package registries, API references
-
-STRATEGY 2 PROTOCOL (7 steps across 4 layers):
-
-Step 1: REVIEW BASELINE
-    └─ What is the CORRECT way to do this?
-
-Step 2: CREATIVE ADDON SEARCH (Layer 2)
-    └─ How does the COMMUNITY do it better?
-
-Step 3: DEEP RESEARCH LAYER (Layer 3)
-    └─ Is it SAFE, FAST, and FUTURE-PROOF?
-
-Step 4: SYNTHESIZE (all 3 layers)
-    └─ Combine into enriched plan
-
-Step 5: EXECUTE WITH VERIFICATION
-    └─ Validate each step against all 3 layers
-
-Step 6: POST-EXECUTION VALIDATION
-    └─ Confirm best approach was used
-
-Step 7: ITERATIVE IMPROVEMENT SEARCH (Layer 4) ← NEW
-    └─ Solution is built. Now: "What would make it even better?"
+┌─────────────────────────────────────────────────────────────┐
+│                   SMARTWEB MODE v8.0.0                        │
+│                                                               │
+│  PHASE 0: S1 GATE (runs first, before any tool)              │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │ 3 objective checks. ALL must pass to use S1.          │   │
+│  │ 1. Exactly 1 tool call for COMPLETE answer?           │   │
+│  │ 2. Zero design choice or ambiguity?                   │   │
+│  │ 3. ≤5 lines of code in single file?                   │   │
+│  │ If ANY fails → S1 locked, proceed to Phase 1          │   │
+│  └──────────────────────┬───────────────────────────────┘   │
+│                         │ S1 locked → decision tree           │
+│                         ▼                                     │
+│  PHASE 1: STRATEGY DECISION TREE                              │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │ Q1→S1 | Q2→(Q2a→S4 | S2) | S3                        │   │
+│  └──────────────────────┬───────────────────────────────┘   │
+│                         │                                     │
+│  S1 / S2 / S3 / S4 — each with built-in anti-laziness rules │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │ S2: mandates specific file paths + actions            │   │
+│  │ S3: requires evidence (file:line citations)           │   │
+│  │ S4: delegation mandatory, no DIY                      │   │
+│  │ WEB SEARCH: trigger-based (knowledge gaps), not ritual│   │
+│  └──────────────────────┬───────────────────────────────┘   │
+│                         │                                     │
+│                         ▼                                     │
+│  COMPLETENESS CHECK (runs after EVERY strategy)               │
+│  ┌──────────────────────────────────────────────────────┐   │
+│  │ 1. Production-ready? No stubs, TODOs, placeholders?   │   │
+│  │ 2. Edge cases handled? (empty, null, error, boundary) │   │
+│  │ 3. Self-contained? No follow-up needed to use it?     │   │
+│  │ ALL 3 must pass → task is done                        │   │
+│  └──────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## Layer 4: Iterative Improvement (Step 7)
+## Comparison: Old vs New
 
-Runs AFTER the solution is drafted. Searches for refinements that only become visible after building:
-
-| Research Target | URL | What It Reveals |
+| Dimension | v6-v7 (fetch-first) | v8.0.0 (output-gated) |
 |---|---|---|
-| **Lessons learned** | `dev.to/search?q={feature}+lessons+learned` | "After building X, here's what I'd do differently" |
-| **Retrospectives** | `medium.com/search?q={feature}+improvements` | Post-mortems, refinement guides |
-| **Optimization patterns** | Stack Overflow by tag + "improve" | Battle-tested optimizations |
-| **Accessibility gaps** | `smashingmagazine.com/search/?q={feature}+accessibility` | Inclusive design, a11y improvements |
-| **Upgrade readiness** | GitHub Issues: `breaking+change+v{next-version}` | Will this break next version? |
-| **Code review lens** | GitHub Code Search: `code+review+best+practices` | What would a senior dev flag? |
+| Primary defense | Web search before acting | Quality gates after acting |
+| Blocks lazy S1 abuse | No (web search runs regardless) | Yes (S1 GATE with objective criteria) |
+| Blocks lazy plans | No | Yes (vague bullets → forced S3) |
+| Blocks lazy completion | No | Yes (COMPLETENESS CHECK) |
+| Token waste on trivial tasks | High (mandatory fetch) | Low (fetch only on triggers) |
+| Catches missing edge cases | No | Yes (CHECK question 2) |
+| Self-contained output enforced | No | Yes (CHECK question 3) |
+| Lazy thought detection | Partial (5 thoughts) | Comprehensive (7 thoughts with corrections) |
+| Web search intelligence | Task-type-based (blunt) | Information-gap-based (precise) |
+| Lines | 147 | 156 |
 
-**Step 7 actions (surgical, not restart):**
-- Concrete improvement found → apply immediately (surgical refinement)
-- Better pattern discovered → note as suggested follow-up
-- Approach confirmed solid → output with confidence
-- **1 fetch, seconds of research, hours of rework saved**
+## The S1 GATE
 
-## All 42 URL Templates
+The critical innovation. In Smart Mode, a lazy model can route ANY task to S1 by claiming it's "trivial." The S1 GATE uses 3 objective questions the model cannot fudge:
 
-| Category | Count | Sources |
-|---|---|---|
-| Official docs | 16 | npm, PyPI, crates.io, pkg.go.dev, React, Next.js, Tailwind, Vite, TypeScript, Node.js, Python, MDN, Docker, GitHub, error search, general |
-| Creative sources | 10 | Stack Overflow, GitHub Discussions, Dev.to, Medium, Patterns.dev, CSS-Tricks, Smashing Magazine, Reddit, Hacker News, YouTube |
-| Deep research | 10 | GitHub Code Search, BundlePhobia, npm trends, CanIUse, GitHub Security, npm audit, Changelog, Releases, Snyk, LibHunt |
-| Iterative improvement | 6 | Dev.to lessons, Medium reflections, Stack Overflow refinements, Smashing a11y, GitHub future issues, Code Review guides |
+1. **1 tool call for complete answer?** — Not "1 step" but "1 tool call." Reading a file + editing it = 2 calls = NOT S1.
+2. **Zero design choice?** — Any decision between valid approaches = NOT S1.
+3. **≤5 lines in single file?** — Any real code change exceeds this. Renames and value changes pass.
 
-## Anti-Laziness Table (18 rows)
+A lazy model defaults to S1. This gate forces S2 minimum on anything nontrivial — and S2 has its own anti-laziness enforcement (vague bullets → S3).
 
-3 new rows for Layer 4:
+## WEB SEARCH: Trigger-Based, Not Ritual
 
-| Model's thought | Refutation |
+| Trigger | Action |
 |---|---|
-| "I'm done, no need to search again" | Completion is when the solution is POLISHED, not just built. Step 7 is the polish pass. |
-| "The user won't notice missing refinements" | Excellence is in the details. One extra search finds the details. |
-| "Iterative improvement is over-engineering" | Step 7 is 1 webfetch. It takes seconds. It saves hours of future rework. |
+| Package/API/library with version-specific behavior | MUST fetch official docs |
+| Error message code inspection can't explain | MUST fetch |
+| "Latest", "current", year-specific info | MUST fetch |
+| Function/syntax unused in 6+ months | MUST fetch |
+| Complex security-sensitive pattern | MAY fetch |
+| Pure logic, fundamentals, mechanical tasks | SKIP fetch |
 
-3 new banned phrases:
-- "I'm done searching" / "No more improvements needed" / "Iterative improvement is over-engineering"
+## LAZY THOUGHT DETECTOR
 
-## Full S2 Caps
+7 specific lazy thoughts with correction instructions. If the model catches itself thinking any of these, it must stop and course-correct:
 
-| Phase | Fetches |
-|---|---|
-| Step 0 baseline | 1-2 |
-| Step 2 creative addon | 1-2 |
-| Step 3 deep research | 1-2 |
-| Step 7 iterative improvement | 1 |
-| **Total S2** | **4-7 max** |
+- "This is probably fine" → Verify. "Probably" means you didn't check.
+- "I'll keep it simple" → Simple is fine. Incomplete is not.
+- "They can figure out the rest" → No. Produce the complete output.
+- "That's good enough" → Is it COMPLETE? "Good enough" ≠ "done."
+- "I don't need to check that" → If you thought about checking it, check it.
+- "This doesn't need investigation" → Did it pass S1 GATE? If not → investigate.
+- "The fix is obvious" → Write it. Then verify it.
 
 ## Installation
 
@@ -107,23 +124,23 @@ node installer/install.js [--global] [--project /path/to/project]
 
 ```
 stopbeinglazy_web_kilo/
-├── .kilo/agent/smartweb.md   ← v6.3.0 four-layer agent
+├── .kilo/agent/smartweb.md   ← v8.0.0 structural anti-laziness agent
 ├── installer/
-│   ├── install.ps1           ← v6.3.0
-│   ├── install.sh            ← v6.3.0
-│   └── install.js            ← v6.3.0
-├── kilo.json                 ← v6.3.0 config
+│   ├── install.ps1
+│   ├── install.sh
+│   └── install.js
+├── kilo.json
 └── README.md
 ```
 
 ## Version History
 
-- **v6.3.0** — Four-layer protocol. Layer 4: iterative improvement search (post-completion polish). 6 new URL templates (42 total). S2 = 7 steps. Anti-laziness at 18 rows.
-- **v6.2.0** — Three-layer architecture. Layer 3: deep research (perf, security, compat).
-- **v6.1.0** — Creative addon search. Layer 2: community sources.
+- **v8.0.0** — Structural anti-laziness: S1 GATE (3 objective checks), COMPLETENESS CHECK (post-execution 3-question gate), trigger-based webfetch (not ritual), LAZY THOUGHT DETECTOR (7 thoughts), S2 vague-bullet escalation to S3, S3 evidence requirement, S4 delegation enforcement. Removed SWIPE layer (bloat), removed mandatory webfetch (waste). 156 lines.
+- **v7.0.0** — SWIPE Layer: Intent-Aware Prompt Enhancement preprocessor. (Deprecated — bloat, lazy models skipped it.)
+- **v6.3.0** — Four-layer protocol with iterative improvement search. (Deprecated — over-engineered.)
+- **v6.2.0** — Three-layer architecture with deep research.
+- **v6.1.0** — Creative addon search layer.
 - **v6.0.0** — Fetch-first, anti-laziness table, binary verification.
 - **v5.0.0** — Checkbox-driven checklist enforcement.
 - **v4.0.0** — Proportional +WEB strategy variants.
 - **v3.0.0** — Always-on web search (failed).
-- **v2.0.0** — Q0 merged into decision tree.
-- **v1.x** — Discretionary approaches.
